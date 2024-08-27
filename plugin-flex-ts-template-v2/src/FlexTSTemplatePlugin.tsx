@@ -20,5 +20,11 @@ export default class FlexTSTemplatePlugin extends FlexPlugin {
    */
   init(flex: typeof Flex, manager: Flex.Manager) {
     initFeatures(flex, manager);
+    flex.MainHeader.defaultProps.logoUrl = 'https://i.postimg.cc/7ZPsMhyH/connie-contact-rtc-logo-tm.png';
+    manager.strings.NoTasks = 'There are no active tasks Hooray!';
+    manager.strings.TaskHeaderLine = '{{task.attributes.skill}}';
+    manager.strings.TaskLineCallReserved = 'From: {{task.attributes.customerAddress}}';
+    manager.strings.TaskLineSmsReserved = 'From: {{task.attributes.customerAddress}}';
+    manager.strings.TaskLineChatReserved = 'From: {{task.attributes.customerAddress}}';
   }
 }

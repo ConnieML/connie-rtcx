@@ -23,7 +23,7 @@ export const stringHook = () => ({
     [StringTemplates.DispositionTab]: 'Disposition',
     [StringTemplates.SelectDispositionTitle]: 'Select a disposition',
     [StringTemplates.SelectDispositionHelpText]: 'The selected disposition will be saved when you complete this task.',
-    [StringTemplates.NotesTitle]: 'Notes',
+    [StringTemplates.NotesTitle]: 'Agent Notes',
     [StringTemplates.NotesCharactersRemaining]: '{{characters}} characters remaining',
     [StringTemplates.ChooseAnOption]: 'Choose an option',
     [StringTemplates.ChooseOptions]: 'Choose one or more options',
