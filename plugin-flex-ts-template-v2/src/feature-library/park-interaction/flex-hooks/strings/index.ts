@@ -30,13 +30,13 @@ export enum StringTemplates {
 
 export const stringHook = () => ({
   'en-US': {
-    [StringTemplates.ParkSuccess]: 'The conversation is now parked.',
+    [StringTemplates.ParkSuccess]: 'The task is now parked.',
     [StringTemplates.ParkError]: 'An error occurred while attempting to park the conversation: {{message}}',
     [StringTemplates.ParkInteraction]: 'Park interaction',
     [StringTemplates.WebhookError]: 'Invalid webhook URL. Parking is not supported when running locally.',
     [StringTemplates.NonCbmError]: 'Parking is only available for conversation-based messaging tasks.',
     [StringTemplates.MultipleParticipantsError]:
-      'This conversation cannot be parked because there are multiple internal participants.',
+      'This task cannot be parked because there are multiple internal participants.',
     [StringTemplates.ParkedInteractions]: 'Parked Interactions',
     [StringTemplates.UnparkSuccess]: 'The conversation is now unparked.',
     [StringTemplates.UnparkGenericError]: 'An error occurred while attempting to unpark the conversation: {{message}}',
