@@ -5,8 +5,7 @@ import { ConversationState, styled, Actions } from '@twilio/flex-ui';
 
 import { Participants } from './Participants.tsx/Participants';
 import { InvitedParticipants } from './InvitedParticipants/InvitedParticipants';
-import { ParticipantDetails } from '../../types/ParticipantDetails';
-import { InvitedParticipantDetails } from '../../types/InvitedParticipantDetails';
+import { InvitedParticipantDetails, ParticipantDetails } from '../../../../types/conversations/Participant';
 import { getUpdatedParticipantDetails, getUpdatedInvitedParticipantDetails } from './hooks';
 import {
   CancelChatParticipantInviteActionPayload,
@@ -18,7 +17,7 @@ const ParticipantsTabContainer = styled.div`
   padding-right: 3%;
   padding-top: 3%;
   width: 100%;
-  overflow-y: scroll;
+  overflow-y: auto;
 `;
 
 interface ParticipantsTabProps {

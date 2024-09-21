@@ -1,9 +1,11 @@
-import { Actions, ITask, Notifications, TaskHelper } from '@twilio/flex-ui';
+import { Actions, ITask, Notifications, TaskHelper, templates } from '@twilio/flex-ui';
 
 import { shouldSkipPhoneNumberValidation } from '../../config';
 import PhoneNumberService from '../../../../utils/serverless/PhoneNumbers/PhoneNumberService';
 import ProgrammableVoiceService from '../../../../utils/serverless/ProgrammableVoice/ProgrammableVoiceService';
 import { CustomTransferDirectoryNotification } from '../notifications/CustomTransferDirectory';
+import { StringTemplates } from '../strings/CustomTransferDirectory';
+import logger from '../../../../utils/logger';
 
 export const registerStartExternalColdTransfer = async () => {
   Actions.registerAction(
@@ -16,7 +18,9 @@ export const registerStartExternalColdTransfer = async () => {
       }
 
       if (!task) {
-        console.error('Cannot start cold transfer without either a task or a valid task sid');
+        logger.error(
+          '[custom-transfer-directory] Cannot start cold transfer without either a task or a valid task sid',
+        );
         return;
       }
 
@@ -26,8 +30,15 @@ export const registerStartExternalColdTransfer = async () => {
         if (!validationCheck.success) {
           Notifications.showNotification(CustomTransferDirectoryNotification.PhoneNumberFailedValidationCheckRequest);
           return;
-        } else if (validationCheck.success && !validationCheck.lookupResponse?.valid) {
-          const errors = validationCheck.lookupResponse.validationErrors.join(', ');
+        } else if (validationCheck.success && !validationCheck.valid) {
+          let errors = validationCheck.invalidReason;
+
+          errors = errors?.replace('COUNTRY_DISABLED', templates[StringTemplates.CountryDisabled]());
+          errors = errors?.replace(
+            'HIGH_RISK_SPECIAL_NUMBER_DISABLED',
+            templates[StringTemplates.HighRiskSpecialNumberDisabled](),
+          );
+
           Notifications.showNotification(
             CustomTransferDirectoryNotification.PhoneNumberFailedValidationCheckWithErrors,
             {
@@ -46,7 +57,7 @@ export const registerStartExternalColdTransfer = async () => {
           callerId,
         );
       } catch (error: any) {
-        console.error('Error executing startColdTransfer', error);
+        logger.error('[custom-transfer-directory] Error executing startColdTransfer', error);
         Notifications.showNotification(CustomTransferDirectoryNotification.ErrorExecutingColdTransfer, {
           message: error.message,
         });

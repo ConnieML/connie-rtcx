@@ -6,14 +6,15 @@ import { EncodedParams } from '../../../types/serverless';
 import ApiService from '../../../utils/serverless/ApiService';
 import { getWorkerName } from './inviteTracker';
 import { TransferOptions } from '../types/ActionPayloads';
+import logger from '../../../utils/logger';
 
 const manager: any | undefined = Manager.getInstance();
 
 export interface RemoveParticipantRESTPayload {
   conversationSid: string;
-  flexInteractionSid: string; // KDxxx sid for inteactions API
+  flexInteractionSid: string; // KDxxx sid for interactions API
   flexInteractionChannelSid: string; // UOxxx sid for interactions API
-  flexInteractionParticipantSid: string; // UTxxx sid for interactions API for the transferrring agent to remove
+  flexInteractionParticipantSid: string; // UTxxx sid for interactions API for the transferring agent to remove
 }
 
 export interface TransferRESTPayload {
@@ -27,7 +28,8 @@ export interface TransferRESTPayload {
   workersToIgnore: object; // {key: value} - where key is the taskrouter attribute to set and value is a string array of names of agents in conversation to make sure they don't get reservations to join again
   flexInteractionSid: string; // KDxxx sid for inteactions API
   flexInteractionChannelSid: string; // UOxxx sid for interactions API
-  removeFlexInteractionParticipantSid: string; // UTxxx sid for interactions API for the transferrring agent to remove them from conversation
+  removeFlexInteractionParticipantSid: string; // UTxxx sid for interactions API for the transferring agent to remove them from conversation
+  taskChannelUniqueName: string; // Task channel to use for the new task
 }
 
 const _getMyParticipantSid = (participants: any): string => {
@@ -52,8 +54,8 @@ const _queueNameFromSid = async (transferTargetSid: string) => {
 
   try {
     queues = await TaskService.getQueues();
-  } catch (error) {
-    console.error('conversation-transfer: Unable to get queues', error);
+  } catch (error: any) {
+    logger.error('[conversation-transfer] Unable to get queues', error);
   }
 
   const queueResult = queues
@@ -108,7 +110,7 @@ export const buildInviteParticipantAPIPayload = async (
   targetSid: string,
   options?: TransferOptions,
 ): Promise<TransferRESTPayload | null> => {
-  const { taskSid } = task;
+  const { taskSid, taskChannelUniqueName } = task;
   const conversationId = task.attributes?.conversations?.conversation_id || task.taskSid;
   const transferTargetSid = targetSid;
   const removeInvitingAgent = options?.mode === 'COLD';
@@ -124,7 +126,7 @@ export const buildInviteParticipantAPIPayload = async (
   if (transferTargetSid.startsWith('WQ')) {
     transferQueueName = await _queueNameFromSid(transferTargetSid);
     if (!transferQueueName) {
-      console.error('Transfer failed. queueNameFromSid failed for', transferTargetSid);
+      logger.error(`[conversation-transfer] Transfer failed. queueNameFromSid failed for ${transferTargetSid}`);
       return null;
     }
   } else {
@@ -134,7 +136,9 @@ export const buildInviteParticipantAPIPayload = async (
   const { flexInteractionSid = null, flexInteractionChannelSid = null, conversationSid = null } = task.attributes;
 
   if (!flexInteractionSid || !flexInteractionChannelSid) {
-    console.error('Transfer failed. Missing flexInteractionSid or flexInteractionChannelSid', task.sid);
+    logger.error(
+      `[conversation-transfer] Transfer failed. Missing flexInteractionSid or flexInteractionChannelSid for ${task.sid}`,
+    );
     return null;
   }
 
@@ -150,7 +154,7 @@ export const buildInviteParticipantAPIPayload = async (
     removeFlexInteractionParticipantSid = _getMyParticipantSid(participants) || '';
 
     if (!removeFlexInteractionParticipantSid) {
-      console.error("Transfer failed. Didn't find flexInteractionPartipantSid", task.sid);
+      logger.error(`[conversation-transfer] Transfer failed. Didn't find flexInteractionPartipantSid for ${task.sid}`);
       return null;
     }
   }
@@ -167,6 +171,7 @@ export const buildInviteParticipantAPIPayload = async (
     flexInteractionSid,
     flexInteractionChannelSid,
     removeFlexInteractionParticipantSid,
+    taskChannelUniqueName,
   };
 };
 
@@ -194,6 +199,7 @@ class ChatTransferService extends ApiService {
       flexInteractionSid: encodeURIComponent(requestPayload.flexInteractionSid),
       flexInteractionChannelSid: encodeURIComponent(requestPayload.flexInteractionChannelSid),
       removeFlexInteractionParticipantSid: encodeURIComponent(requestPayload.removeFlexInteractionParticipantSid),
+      taskChannelUniqueName: encodeURIComponent(requestPayload.taskChannelUniqueName),
     };
 
     return this.fetchJsonWithReject<TransferRESTResponse>(
