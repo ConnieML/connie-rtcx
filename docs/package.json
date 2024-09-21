@@ -17,10 +17,17 @@
   },
   "dependencies": {
     "@cmfcmf/docusaurus-search-local": "^1.1.0",
+<<<<<<< HEAD
     "@docusaurus/core": "^3.5.2",
     "@docusaurus/plugin-client-redirects": "^3.5.2",
     "@docusaurus/preset-classic": "^3.5.2",
     "@docusaurus/theme-mermaid": "^3.5.2",
+=======
+    "@docusaurus/core": "^3.4.0",
+    "@docusaurus/plugin-client-redirects": "^3.4.0",
+    "@docusaurus/preset-classic": "^3.4.0",
+    "@docusaurus/theme-mermaid": "^3.4.0",
+>>>>>>> c559c5a243a27da5a618422e334f7a79e970f814
     "@mdx-js/react": "^3.0.0",
     "@twilio-paste/design-tokens": "^9.2.1",
     "docusaurus-plugin-sass": "^0.2.5",
@@ -29,8 +36,13 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+<<<<<<< HEAD
     "@docusaurus/module-type-aliases": "^3.5.2",
     "@docusaurus/types": "^3.5.2"
+=======
+    "@docusaurus/module-type-aliases": "^3.4.0",
+    "@docusaurus/types": "^3.4.0"
+>>>>>>> c559c5a243a27da5a618422e334f7a79e970f814
   },
   "browserslist": {
     "production": [

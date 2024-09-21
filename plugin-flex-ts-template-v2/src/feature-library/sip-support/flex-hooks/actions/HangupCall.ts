@@ -8,16 +8,22 @@ import {
 } from '../../helpers/CallControlHelper';
 import ProgrammableVoiceService from '../../../../utils/serverless/ProgrammableVoice/ProgrammableVoiceService';
 import logger from '../../../../utils/logger';
+<<<<<<< HEAD
 import { validateUiVersion } from '../../../../utils/configuration';
+=======
+>>>>>>> c559c5a243a27da5a618422e334f7a79e970f814
 
 export const actionEvent = FlexActionEvent.replace;
 export const actionName = FlexAction.HangupCall;
 export const actionHook = function handleSipHangup(flex: typeof Flex, _manager: Flex.Manager) {
+<<<<<<< HEAD
   if (validateUiVersion('>= 2.7')) {
     // Flex UI 2.7 and later calls WrapupTask instead, so do not install this hook on those versions.
     return;
   }
 
+=======
+>>>>>>> c559c5a243a27da5a618422e334f7a79e970f814
   if (isWorkerUsingWebRTC()) {
     logger.info('[sip-support] Worker is using WebRTC, hangup hook NOT enabled');
     return;

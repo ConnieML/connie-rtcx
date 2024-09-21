@@ -25,9 +25,13 @@ const getDualChannelCallSid = (task: ITask): string | null => {
       break;
     }
     case 'worker': {
+<<<<<<< HEAD
       participantLeg = participants.find(
         (p) => p.participantType === 'worker' && p.isCurrentWorker && p.status === 'joined',
       );
+=======
+      participantLeg = participants.find((p) => p.participantType === 'worker' && p.isCurrentWorker);
+>>>>>>> c559c5a243a27da5a618422e334f7a79e970f814
       break;
     }
     default:

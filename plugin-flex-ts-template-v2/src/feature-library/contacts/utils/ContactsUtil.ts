@@ -19,7 +19,11 @@ import {
   isSharedDirectoryEnabled,
   isSharedDirectoryAgentEditable,
 } from '../config';
+<<<<<<< HEAD
 import { getUserLanguage, getLoadedFeatures, getFeatureFlags } from '../../../utils/configuration';
+=======
+import { getUserLanguage } from '../../../utils/configuration';
+>>>>>>> c559c5a243a27da5a618422e334f7a79e970f814
 import SyncClient, { getAllSyncMapItems } from '../../../utils/sdk-clients/sync/SyncClient';
 import logger from '../../../utils/logger';
 
@@ -187,6 +191,7 @@ class ContactsUtil {
     }
   };
 
+<<<<<<< HEAD
   addContact = async (
     name: string,
     phoneNumber: string,
@@ -195,6 +200,9 @@ class ContactsUtil {
     allowColdTransfer?: boolean,
     allowWarmTransfer?: boolean,
   ) => {
+=======
+  addContact = async (name: string, phoneNumber: string, notes: string, shared: boolean) => {
+>>>>>>> c559c5a243a27da5a618422e334f7a79e970f814
     if (!this.workerSid && !shared) {
       logger.error('[contacts] Error adding contact: No worker sid');
       return;
@@ -204,16 +212,23 @@ class ContactsUtil {
       return;
     }
     try {
+<<<<<<< HEAD
       const contact: Contact = {
+=======
+      const contact = {
+>>>>>>> c559c5a243a27da5a618422e334f7a79e970f814
         key: uuidv4(),
         name,
         phoneNumber,
         notes,
       };
+<<<<<<< HEAD
       if (shared) {
         contact.allowColdTransfer = allowColdTransfer ?? true;
         contact.allowWarmTransfer = allowWarmTransfer ?? true;
       }
+=======
+>>>>>>> c559c5a243a27da5a618422e334f7a79e970f814
       const map = await SyncClient.map(`${CONTACTS_KEY}_${shared ? this.accountSid : this.workerSid}`);
       await map.set(contact.key, contact);
     } catch (error: any) {
@@ -254,11 +269,14 @@ class ContactsUtil {
       logger.error('[contacts] Error updating contact', error);
     }
   };
+<<<<<<< HEAD
 
   shouldShowTransferOptions = (shared: boolean) =>
     shared &&
     getLoadedFeatures().includes('custom-transfer-directory') &&
     (getFeatureFlags()?.features?.custom_transfer_directory?.external_directory?.enabled || false);
+=======
+>>>>>>> c559c5a243a27da5a618422e334f7a79e970f814
 }
 
 const contactsUtil = new ContactsUtil();

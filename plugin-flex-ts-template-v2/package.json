@@ -37,7 +37,11 @@
   "devDependencies": {
     "@babel/preset-typescript": "^7.12.1",
     "@testing-library/react": "^12.1.5",
+<<<<<<< HEAD
     "@twilio/flex-ui": "^2.8.3",
+=======
+    "@twilio/flex-ui": "^2.7.2",
+>>>>>>> c559c5a243a27da5a618422e334f7a79e970f814
     "@types/jest": "^27.5.2",
     "@types/luxon": "^3.1.0",
     "@types/react-redux": "^7.1.1",

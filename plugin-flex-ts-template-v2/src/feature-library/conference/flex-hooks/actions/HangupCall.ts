@@ -21,12 +21,17 @@ export const actionHook = function handleConferenceHangup(flex: typeof Flex, _ma
       return updatedTask.conference;
     };
 
+<<<<<<< HEAD
     // check if worker hanging up is last worker on the call and this is a multi-party call
     if (
       conference &&
       conference.liveWorkerCount === 1 &&
       conference.liveParticipantCount - conference.liveWorkerCount > 1
     ) {
+=======
+    // check if worker hanging up is last worker on the call
+    if (conference && conference.liveWorkerCount === 1) {
+>>>>>>> c559c5a243a27da5a618422e334f7a79e970f814
       // if so, ensure no other participants are on hold as
       // no external parties will be able to remove them from being on hold.
       conference.participants.forEach(async (participant: Flex.ConferenceParticipant) => {

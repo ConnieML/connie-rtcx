@@ -11,7 +11,11 @@ This feature adds a contacts directory to Flex. The contacts directory consists 
 - Personal contacts are contacts which are created by the worker, and are specific to that worker. The worker can add, modify, or delete any of their personal contacts.
 - Shared contacts are contacts which are visible to all workers. By default, only workers with the admin or supervisor role can add, modify, or delete shared contacts. However, these can be optionally made editable for agents as well.
 
+<<<<<<< HEAD
 Contacts can be viewed, managed, and dialed using the contacts view added to Flex. In addition, a "Call Contact" section is added to the outbound dialer panel, allowing easy dialing of contacts from any view. Also, if the `custom-transfer-directory` feature is enabled, contacts are available in the transfer panel for cold or warm transfer, and shared contacts can be configured to disable cold and/or warm transfer capability.
+=======
+Contacts can be viewed, managed, and dialed using the contacts view added to Flex. In addition, a "Call Contact" section is added to the outbound dialer panel, allowing easy dialing of contacts from any view. Also, if the `custom-transfer-directory` feature is enabled, contacts are available in the transfer panel for cold or warm transfer.
+>>>>>>> c559c5a243a27da5a618422e334f7a79e970f814
 
 ## User experience
 

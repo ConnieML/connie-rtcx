@@ -1,4 +1,12 @@
 {
+<<<<<<< HEAD
+=======
+  "sdkOptions": {
+    "voice": {
+      "allowIncomingWhileBusy": true
+    }
+  },
+>>>>>>> c559c5a243a27da5a618422e334f7a79e970f814
   "custom_data": {
     "serverless_functions_domain": "<YOUR_SERVERLESS_DOMAIN>",
     "common": {
@@ -214,7 +222,19 @@
         },
         "external_directory": {
           "enabled": true,
+<<<<<<< HEAD
           "skipPhoneNumberValidation": false
+=======
+          "skipPhoneNumberValidation": false,
+          "directory": [
+            {
+              "cold_transfer_enabled": true,
+              "warm_transfer_enabled": true,
+              "label": "Sample Entry",
+              "number": "+10000000000"
+            }
+          ]
+>>>>>>> c559c5a243a27da5a618422e334f7a79e970f814
         }
       },
       "dispositions": {

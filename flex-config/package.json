@@ -9,7 +9,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+<<<<<<< HEAD
     "axios": "^1.7.4",
+=======
+    "axios": "^1.6.0",
+>>>>>>> c559c5a243a27da5a618422e334f7a79e970f814
     "dotenv": "^16.0.3",
     "fs": "^0.0.1-security",
     "lodash": "^4.17.21"

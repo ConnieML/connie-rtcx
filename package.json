@@ -31,7 +31,11 @@
   },
   "homepage": "https://github.com/twilio-professional-services/flex-project-template#readme",
   "devDependencies": {
+<<<<<<< HEAD
     "axios": "^1.7.5",
+=======
+    "axios": "^1.7.2",
+>>>>>>> c559c5a243a27da5a618422e334f7a79e970f814
     "eslint": "^8.37.0",
     "json5": "^2.2.3",
     "lodash": "^4.17.21",

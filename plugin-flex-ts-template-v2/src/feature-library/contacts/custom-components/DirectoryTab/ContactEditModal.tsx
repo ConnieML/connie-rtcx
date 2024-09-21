@@ -2,7 +2,10 @@ import { useEffect, useState } from 'react';
 import { Template, templates } from '@twilio/flex-ui';
 import { Button } from '@twilio-paste/core/button';
 import { Input } from '@twilio-paste/core/input';
+<<<<<<< HEAD
 import { Switch } from '@twilio-paste/core/switch';
+=======
+>>>>>>> c559c5a243a27da5a618422e334f7a79e970f814
 import { useUIDSeed } from '@twilio-paste/core/uid-library';
 import { Modal, ModalBody, ModalFooter, ModalFooterActions, ModalHeader, ModalHeading } from '@twilio-paste/core/modal';
 import { Label } from '@twilio-paste/core/label';
@@ -24,8 +27,11 @@ const ContactEditModal = ({ contact, isOpen, shared, handleClose }: Props) => {
   const [name, setName] = useState(contact?.name ?? '');
   const [phoneNumber, setPhoneNumber] = useState(contact?.phoneNumber ?? '');
   const [notes, setNotes] = useState(contact?.notes ?? '');
+<<<<<<< HEAD
   const [allowColdTransfer, setAllowColdTransfer] = useState(contact?.allowColdTransfer ?? true);
   const [allowWarmTransfer, setAllowWarmTransfer] = useState(contact?.allowWarmTransfer ?? true);
+=======
+>>>>>>> c559c5a243a27da5a618422e334f7a79e970f814
   const [isSaving, setIsSaving] = useState(false);
 
   const seed = useUIDSeed();
@@ -36,8 +42,11 @@ const ContactEditModal = ({ contact, isOpen, shared, handleClose }: Props) => {
       setName('');
       setPhoneNumber('');
       setNotes('');
+<<<<<<< HEAD
       setAllowColdTransfer(true);
       setAllowWarmTransfer(true);
+=======
+>>>>>>> c559c5a243a27da5a618422e334f7a79e970f814
     }
   }, [isOpen]);
 
@@ -45,14 +54,21 @@ const ContactEditModal = ({ contact, isOpen, shared, handleClose }: Props) => {
     setName(contact?.name ?? '');
     setPhoneNumber(contact?.phoneNumber ?? '');
     setNotes(contact?.notes ?? '');
+<<<<<<< HEAD
     setAllowColdTransfer(contact?.allowColdTransfer ?? true);
     setAllowWarmTransfer(contact?.allowWarmTransfer ?? true);
+=======
+>>>>>>> c559c5a243a27da5a618422e334f7a79e970f814
   }, [contact]);
 
   const save = async () => {
     setIsSaving(true);
     if (isNew) {
+<<<<<<< HEAD
       await ContactsUtil.addContact(name, phoneNumber, notes, shared, allowColdTransfer, allowWarmTransfer);
+=======
+      await ContactsUtil.addContact(name, phoneNumber, notes, shared);
+>>>>>>> c559c5a243a27da5a618422e334f7a79e970f814
     } else if (contact) {
       const newContact = {
         ...contact,
@@ -60,10 +76,13 @@ const ContactEditModal = ({ contact, isOpen, shared, handleClose }: Props) => {
         phoneNumber,
         notes,
       };
+<<<<<<< HEAD
       if (shared) {
         newContact.allowColdTransfer = allowColdTransfer;
         newContact.allowWarmTransfer = allowWarmTransfer;
       }
+=======
+>>>>>>> c559c5a243a27da5a618422e334f7a79e970f814
       await ContactsUtil.updateContact(newContact, shared);
     }
     handleClose();
@@ -111,6 +130,7 @@ const ContactEditModal = ({ contact, isOpen, shared, handleClose }: Props) => {
             </Label>
             <TextArea id={seed('notes')} name="notes" value={notes} onChange={(e) => setNotes(e.target.value)} />
           </FormControl>
+<<<<<<< HEAD
           {ContactsUtil.shouldShowTransferOptions(shared) && (
             <>
               <FormControl>
@@ -135,6 +155,8 @@ const ContactEditModal = ({ contact, isOpen, shared, handleClose }: Props) => {
               </FormControl>
             </>
           )}
+=======
+>>>>>>> c559c5a243a27da5a618422e334f7a79e970f814
         </Form>
       </ModalBody>
       <ModalFooter>
